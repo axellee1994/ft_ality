@@ -1,7 +1,6 @@
 """Interactive mode and recognition functions for ft_ality"""
 
 from typing import Tuple
-
 from .types import Grammar, Automaton, Move
 from .utils import is_empty, lookup_key
 from .automaton import find_state, find_transition

@@ -2,7 +2,6 @@
 
 from typing import Tuple, Optional
 from functools import reduce
-
 from .types import State, Automaton, Grammar, Move
 
 

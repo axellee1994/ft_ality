@@ -1,7 +1,6 @@
 """ft_ality - Main entry point"""
 
 import sys
-
 from src import (
     parse_grammar,
     build_automaton,

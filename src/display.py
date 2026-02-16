@@ -1,7 +1,6 @@
 """Display functions for ft_ality"""
 
 from typing import Tuple
-
 from .types import Grammar, Move
 from .utils import lookup_symbol
 
@@ -20,13 +19,26 @@ def display_key_mappings(grammar: Grammar) -> None:
         mappings: Tuple[Tuple[str, str], ...],
     ) -> Tuple[Tuple[str, Tuple[Tuple[str, str], ...]], ...]:
         """Group mappings by symbol type"""
-        groups = {}
-        for key, symbol in mappings:
+        from functools import reduce
+
+        def add_to_groups(
+            acc: Tuple[Tuple[str, Tuple[Tuple[str, str], ...]], ...],
+            mapping: Tuple[str, str],
+        ) -> Tuple[Tuple[str, Tuple[Tuple[str, str], ...]], ...]:
+            key, symbol = mapping
             sym_type, desc = get_info(symbol)
-            if sym_type not in groups:
-                groups[sym_type] = []
-            groups[sym_type].append((key, desc))
-        return tuple((t, tuple(sorted(m))) for t, m in sorted(groups.items()))
+
+            existing = tuple((t, items) for t, items in acc if t == sym_type)
+            other = tuple((t, items) for t, items in acc if t != sym_type)
+
+            if existing:
+                t, items = existing[0]
+                return other + ((t, items + ((key, desc),)),)
+            else:
+                return acc + ((sym_type, ((key, desc),)),)
+
+        groups = reduce(add_to_groups, mappings, ())
+        return tuple((t, tuple(sorted(items))) for t, items in sorted(groups))
 
     print("Controls:")
     grouped = group_by_type(grammar.key_mappings)
