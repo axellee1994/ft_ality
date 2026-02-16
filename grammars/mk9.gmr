@@ -1,112 +1,123 @@
-# Mortal Kombat 9 Move Grammar
+# Mortal Kombat 1 (2023) Move Grammar
 
 @alphabet
-# Attack Buttons - Standard MK9 layout
-[BP]: button (Back Punch)
-[FP]: button (Front Punch)
-[BK]: button (Back Kick)
-[FK]: button (Front Kick)
+# Attack Buttons - MK notation (numbers)
+1: button (Front Punch)
+2: button (Back Punch)
+3: button (Front Kick)
+4: button (Back Kick)
 
 # Directional Inputs - Fighting game notation
-[D]: direction (Down)
-[B]: direction (Back)
-[F]: direction (Forward)
-[U]: direction (Up)
-
-# Named aliases for readability
-down: direction (Down alias)
-back: direction (Back alias)
-forward: direction (Forward alias)
-up: direction (Up alias)
+d: direction (Down)
+b: direction (Back)
+f: direction (Forward)
+u: direction (Up)
 
 @keymapping
-# Arrow keys to directions
-Down = [D]
-Left = [B]
-Right = [F]
-Up = [U]
+# Default MK11/MK1 PC keyboard controls
+# Attack buttons
+j = 1
+i = 2
+k = 3
+l = 4
 
-# Named key mappings (alternative notation)
-down = [D]
-back = [B]
-forward = [F]
-up = [U]
+# Movement (WASD standard)
+w = u
+a = b
+s = d
+d = f
 
 @moves
-# Liu Kang - Shaolin Monk
-[BP] -> "Fist of Death" (Liu Kang)
-[D], [F], [BP] -> "Fireball" (Liu Kang)
-[F], [D], [F], [BP] -> "Dragon Kick" (Liu Kang)
-[D], [B], [F], [BP] -> "Fatality: Fire Breath" (Liu Kang)
-[U], [F], [BP], [FP] -> "X-Ray Attack" (Liu Kang)
-[D], [B], [FP] -> "Bicycle Kick" (Liu Kang)
-
-# Johnny Cage - Hollywood Star
-[F], [BP] -> "Rising Punch" (Johnny Cage)
-[BP], [BP], [FP] -> "Triple Strike" (Johnny Cage)
-[F], [BP], [FP] -> "Nut Punch" (Johnny Cage)
-[D], [B], [D], [F], [FP] -> "X-Ray: Jaw Breaker" (Johnny Cage)
-[B], [F], [BP] -> "Shadow Kick" (Johnny Cage)
-[D], [B], [BP] -> "Forceball" (Johnny Cage)
-
-# Sonya Blade - Special Forces
-[BP] -> "Knockdown" (Sonya)
-[FK], [BK], [BP] -> "Juggle Combo" (Sonya)
-[D], [F], [FP] -> "Energy Ring" (Sonya)
-[D], [B], [FK] -> "Leg Grab" (Sonya)
-[F], [F], [BP] -> "Kartwheel" (Sonya)
-
-# Sub-Zero - Lin Kuei Assassin
-[D], [F], [BP] -> "Ice Ball" (Sub-Zero)
-[D], [B], [BK] -> "Slide" (Sub-Zero)
-[D], [F], [FP] -> "Ice Clone" (Sub-Zero)
-[B], [F], [FP] -> "Ice Shower" (Sub-Zero)
-[D], [F], [D], [BP] -> "Fatality: Spine Rip" (Sub-Zero)
+# Liu Kang - Shaolin Champion
+1 -> "Quick Jab" (Liu Kang)
+f, 1 -> "Advancing Strike" (Liu Kang)
+d, b, 1 -> "High Fireball" (Liu Kang)
+d, f, 1 -> "Low Fireball" (Liu Kang)
+b, f, 3 -> "Flying Dragon Kick" (Liu Kang)
+d, b, 4 -> "Bicycle Kick" (Liu Kang)
+d, f, d, b, 1 -> "Fatal Blow" (Liu Kang)
 
 # Scorpion - Hellspawn Ninja
-[B], [B], [BP] -> "Spear" (Scorpion)
-[D], [B], [BP] -> "Teleport Punch" (Scorpion)
-[F], [F], [FK] -> "Hellfire" (Scorpion)
-[D], [F], [D], [U] -> "Fatality: Toasty" (Scorpion)
+b, f, 1 -> "Spear" (Scorpion)
+d, b, 4 -> "Demon Dash" (Scorpion)
+d, b, 3 -> "Teleport" (Scorpion)
+f, d, f, 2 -> "Death Spin" (Scorpion)
+d, f, d, f, 1 -> "Fatal Blow" (Scorpion)
 
-# Kitana - Edenian Princess
-[B], [F], [B], [FK] -> "Fatality: Kiss of Death" (Kitana)
-[B], [B], [FK] -> "Fan Lift" (Kitana)
-[F], [F], [FP] -> "Fan Throw" (Kitana)
-[D], [B], [BP] -> "Square Boost" (Kitana)
+# Sub-Zero - Grandmaster
+d, f, 2 -> "Ice Ball" (Sub-Zero)
+d, b, 4 -> "Slide" (Sub-Zero)
+d, b, 2 -> "Ice Klone" (Sub-Zero)
+b, f, 3 -> "Rising Ice" (Sub-Zero)
+d, f, d, b, 2 -> "Fatal Blow" (Sub-Zero)
 
-# Jax - Special Forces Major
-[BP], [FP] -> "Active Duty" (Jax)
-[D], [D], [BK] -> "Ground Pound" (Jax)
-[F], [F], [FK] -> "Dash Punch" (Jax)
-[D], [B], [BP] -> "Overhead Smash" (Jax)
+# Kitana - Princess of Edenia
+d, f, 1 -> "Fan Toss" (Kitana)
+d, b, 1 -> "Ground War" (Kitana)
+d, b, 3 -> "Square Wave" (Kitana)
+b, f, 2 -> "Edenian Twist" (Kitana)
+f, d, f, 3 -> "Fan Lift" (Kitana)
 
-# Noob Saibot - Shadow Warrior
-[BP], [FP] -> "Saibot Blast" (Noob Saibot)
-[F], [F], [BK] -> "Shadow Slide" (Noob Saibot)
-[D], [F], [BP] -> "Dark Beam" (Noob Saibot)
-[D], [B], [FK] -> "Shadow Upknee" (Noob Saibot)
+# Raiden - Thunder God
+d, f, 1 -> "Lightning Bolt" (Raiden)
+d, b, 3 -> "Electric Fly" (Raiden)
+d, b, 2 -> "Teleport" (Raiden)
+f, f, 4 -> "Storm Cell" (Raiden)
+d, f, d, b, 3 -> "Fatal Blow" (Raiden)
+
+# Mileena - Empress of Outworld
+b, f, 2 -> "Sai Blast" (Mileena)
+f, d, f, 3 -> "Ball Roll" (Mileena)
+d, b, 4 -> "Teleport Kick" (Mileena)
+d, f, 1 -> "Low Sai" (Mileena)
+
+# Johnny Cage - Action Star
+d, b, 1 -> "Forceball" (Johnny Cage)
+b, f, 3 -> "Shadow Kick" (Johnny Cage)
+d, b, 4 -> "Nut Punch" (Johnny Cage)
+f, f, 2 -> "Rising Star" (Johnny Cage)
+
+# Kung Lao - Shaolin Monk
+d, f, 2 -> "Hat Throw" (Kung Lao)
+d, b, 2 -> "Teleport" (Kung Lao)
+b, f, 2 -> "Spin" (Kung Lao)
+d, f, 4 -> "Dive Kick" (Kung Lao)
+
+# Baraka - Tarkatan Warrior
+d, f, 1 -> "Blade Spark" (Baraka)
+b, f, 3 -> "Blade Charge" (Baraka)
+d, b, 2 -> "Blade Spin" (Baraka)
+d, f, 4 -> "Gutted" (Baraka)
+
+# Shang Tsung - Sorcerer
+d, b, 1 -> "Skull Fireball" (Shang Tsung)
+d, f, 2 -> "Ground Skull" (Shang Tsung)
+d, b, 4 -> "Soul Steal" (Shang Tsung)
+
+# Kenshi - Blind Swordsman
+d, f, 1 -> "Telekinetic Push" (Kenshi)
+d, b, 2 -> "Rising Karma" (Kenshi)
+b, f, 3 -> "Spirit Slash" (Kenshi)
+d, f, 4 -> "Telekinetic Slam" (Kenshi)
+
+# Sindel - Queen of Edenia
+d, f, 1 -> "Banshee Barrage" (Sindel)
+d, b, 2 -> "Hair Whip" (Sindel)
+d, b, 4 -> "Levitate" (Sindel)
 
 # Smoke - Enenra
-[D], [B], [BK] -> "Teleport Kick" (Smoke)
-[B], [B], [BP] -> "Smoke Bomb" (Smoke)
-[F], [F], [BK] -> "Smoke Cloud" (Smoke)
+d, b, 1 -> "Smoke Bomb" (Smoke)
+d, f, 3 -> "Invisibility" (Smoke)
+b, f, 2 -> "Teleport Punch" (Smoke)
 
-# Freddy Krueger - Dream Demon
-[BP] -> "Claw Slam" (Freddy Krueger)
-[D], [B], [FP] -> "Hell Spike" (Freddy Krueger)
-[D], [F], [BK] -> "Far Ground Claw" (Freddy Krueger)
+# Reptile - Zaterran
+d, f, 1 -> "Acid Spit" (Reptile)
+b, f, 4 -> "Slide" (Reptile)
+d, b, 2 -> "Invisibility" (Reptile)
 
-# Reptile - Zaterran Warrior
-[D], [F], [BP] -> "Acid Spit" (Reptile)
-[B], [F], [FK] -> "Elbow Dash" (Reptile)
-[D], [B], [FP] -> "Invisibility" (Reptile)
-
-# Ermac - Collective Souls
-[D], [B], [BP] -> "Telekinetic Slam" (Ermac)
-[F], [F], [FP] -> "Force Push" (Ermac)
-[D], [F], [FK] -> "Teleport" (Ermac)
-
-# Generic moves available to all
-[D], [BK] -> "Leg Sweep" (Generic)
-[U], [FK] -> "Jump Kick" (Generic)
+# Generic universal moves
+d, 1 -> "Down Punch" (Universal)
+d, 3 -> "Low Kick" (Universal)
+u, 3 -> "Jump Kick" (Universal)
+b, b -> "Back Dash" (Universal)
+f, f -> "Forward Dash" (Universal)
