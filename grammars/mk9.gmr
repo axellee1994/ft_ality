@@ -1,4 +1,112 @@
-[BP] -> High Punch
-[BK] -> High Kick
-[LP] -> Low Punch
-[LK] -> Low Kick
+# Mortal Kombat 9 Move Grammar
+
+@alphabet
+# Attack Buttons - Standard MK9 layout
+[BP]: button (Back Punch)
+[FP]: button (Front Punch)
+[BK]: button (Back Kick)
+[FK]: button (Front Kick)
+
+# Directional Inputs - Fighting game notation
+[D]: direction (Down)
+[B]: direction (Back)
+[F]: direction (Forward)
+[U]: direction (Up)
+
+# Named aliases for readability
+down: direction (Down alias)
+back: direction (Back alias)
+forward: direction (Forward alias)
+up: direction (Up alias)
+
+@keymapping
+# Arrow keys to directions
+Down = [D]
+Left = [B]
+Right = [F]
+Up = [U]
+
+# Named key mappings (alternative notation)
+down = [D]
+back = [B]
+forward = [F]
+up = [U]
+
+@moves
+# Liu Kang - Shaolin Monk
+[BP] -> "Fist of Death" (Liu Kang)
+[D], [F], [BP] -> "Fireball" (Liu Kang)
+[F], [D], [F], [BP] -> "Dragon Kick" (Liu Kang)
+[D], [B], [F], [BP] -> "Fatality: Fire Breath" (Liu Kang)
+[U], [F], [BP], [FP] -> "X-Ray Attack" (Liu Kang)
+[D], [B], [FP] -> "Bicycle Kick" (Liu Kang)
+
+# Johnny Cage - Hollywood Star
+[F], [BP] -> "Rising Punch" (Johnny Cage)
+[BP], [BP], [FP] -> "Triple Strike" (Johnny Cage)
+[F], [BP], [FP] -> "Nut Punch" (Johnny Cage)
+[D], [B], [D], [F], [FP] -> "X-Ray: Jaw Breaker" (Johnny Cage)
+[B], [F], [BP] -> "Shadow Kick" (Johnny Cage)
+[D], [B], [BP] -> "Forceball" (Johnny Cage)
+
+# Sonya Blade - Special Forces
+[BP] -> "Knockdown" (Sonya)
+[FK], [BK], [BP] -> "Juggle Combo" (Sonya)
+[D], [F], [FP] -> "Energy Ring" (Sonya)
+[D], [B], [FK] -> "Leg Grab" (Sonya)
+[F], [F], [BP] -> "Kartwheel" (Sonya)
+
+# Sub-Zero - Lin Kuei Assassin
+[D], [F], [BP] -> "Ice Ball" (Sub-Zero)
+[D], [B], [BK] -> "Slide" (Sub-Zero)
+[D], [F], [FP] -> "Ice Clone" (Sub-Zero)
+[B], [F], [FP] -> "Ice Shower" (Sub-Zero)
+[D], [F], [D], [BP] -> "Fatality: Spine Rip" (Sub-Zero)
+
+# Scorpion - Hellspawn Ninja
+[B], [B], [BP] -> "Spear" (Scorpion)
+[D], [B], [BP] -> "Teleport Punch" (Scorpion)
+[F], [F], [FK] -> "Hellfire" (Scorpion)
+[D], [F], [D], [U] -> "Fatality: Toasty" (Scorpion)
+
+# Kitana - Edenian Princess
+[B], [F], [B], [FK] -> "Fatality: Kiss of Death" (Kitana)
+[B], [B], [FK] -> "Fan Lift" (Kitana)
+[F], [F], [FP] -> "Fan Throw" (Kitana)
+[D], [B], [BP] -> "Square Boost" (Kitana)
+
+# Jax - Special Forces Major
+[BP], [FP] -> "Active Duty" (Jax)
+[D], [D], [BK] -> "Ground Pound" (Jax)
+[F], [F], [FK] -> "Dash Punch" (Jax)
+[D], [B], [BP] -> "Overhead Smash" (Jax)
+
+# Noob Saibot - Shadow Warrior
+[BP], [FP] -> "Saibot Blast" (Noob Saibot)
+[F], [F], [BK] -> "Shadow Slide" (Noob Saibot)
+[D], [F], [BP] -> "Dark Beam" (Noob Saibot)
+[D], [B], [FK] -> "Shadow Upknee" (Noob Saibot)
+
+# Smoke - Enenra
+[D], [B], [BK] -> "Teleport Kick" (Smoke)
+[B], [B], [BP] -> "Smoke Bomb" (Smoke)
+[F], [F], [BK] -> "Smoke Cloud" (Smoke)
+
+# Freddy Krueger - Dream Demon
+[BP] -> "Claw Slam" (Freddy Krueger)
+[D], [B], [FP] -> "Hell Spike" (Freddy Krueger)
+[D], [F], [BK] -> "Far Ground Claw" (Freddy Krueger)
+
+# Reptile - Zaterran Warrior
+[D], [F], [BP] -> "Acid Spit" (Reptile)
+[B], [F], [FK] -> "Elbow Dash" (Reptile)
+[D], [B], [FP] -> "Invisibility" (Reptile)
+
+# Ermac - Collective Souls
+[D], [B], [BP] -> "Telekinetic Slam" (Ermac)
+[F], [F], [FP] -> "Force Push" (Ermac)
+[D], [F], [FK] -> "Teleport" (Ermac)
+
+# Generic moves available to all
+[D], [BK] -> "Leg Sweep" (Generic)
+[U], [FK] -> "Jump Kick" (Generic)

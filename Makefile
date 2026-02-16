@@ -14,8 +14,11 @@ ft_ality:
 run: ft_ality
 	./ft_ality $(GRAMMAR)
 
+test: build
+	$(PYTHON) main.py $(GRAMMAR)
+
 clean:
-	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null
 	find . -type f -name "*.pyc" -delete
-	find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null || true
+	find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null
 	rm -f ft_ality
