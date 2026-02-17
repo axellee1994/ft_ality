@@ -1,6 +1,15 @@
-"""Utility functions for ft_ality"""
+"""Types and utility functions for ft_ality"""
 
 from typing import Tuple, Optional
+from collections import namedtuple
+
+Symbol = namedtuple("Symbol", ["token", "sym_type", "description"])
+Move = namedtuple("Move", ["sequence", "name", "character"])
+Grammar = namedtuple("Grammar", ["alphabet", "key_mappings", "moves"])
+State = namedtuple("State", ["state_id", "is_final", "moves"])
+Automaton = namedtuple(
+    "Automaton", ["states", "transitions", "initial_state", "alphabet"]
+)
 
 
 def strip_comment(line: str) -> str:
@@ -29,7 +38,7 @@ def extract_parentheses(s: str) -> Tuple[str, str]:
 
 
 def read_file_content(filepath: str) -> Optional[str]:
-    """Read file using sys module (avoiding open keyword violation)"""
+    """Read file using os module (avoiding open keyword violation)"""
     import os
 
     if not os.path.exists(filepath):
@@ -55,8 +64,8 @@ def lookup_key(key_mappings: Tuple[Tuple[str, str], ...], key: str) -> Optional[
 
 
 def lookup_symbol(
-    alphabet: Tuple[Tuple[str, "Symbol"], ...], token: str
-) -> Optional["Symbol"]:
+    alphabet: Tuple[Tuple[str, Symbol], ...], token: str
+) -> Optional[Symbol]:
     """Look up symbol in alphabet"""
     matches = tuple(sym for tok, sym in alphabet if tok == token)
     return matches[0] if matches else None

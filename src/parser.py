@@ -2,7 +2,7 @@
 
 from typing import Tuple, Optional
 from functools import reduce
-from .types import Symbol, Move, Grammar
+from .utils import Symbol, Move, Grammar
 from .utils import strip_comment, is_empty, split_once, extract_parentheses
 
 
@@ -87,11 +87,10 @@ def parse_grammar(content: str) -> Grammar:
     """Parse grammar file content (pure function)"""
     lines = tuple(content.split("\n"))
     alpha_lines, key_lines, move_lines = partition_sections(lines)
-
     alphabet = parse_section(alpha_lines, parse_alphabet_line)
-
-    key_mappings = tuple((token, token) for token, _ in alphabet)
-
+    if key_lines:
+        key_mappings = parse_section(key_lines, parse_keymapping_line)
+    else:
+        key_mappings = tuple((token, token) for token, _ in alphabet)
     moves = parse_section(move_lines, parse_move_line)
-
     return Grammar(alphabet, key_mappings, moves)

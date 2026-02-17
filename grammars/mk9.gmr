@@ -1,107 +1,178 @@
-# Mortal Kombat 1 (2023) Move Grammar
+# Mortal Kombat 1 (2023) - Complete Move Grammar
+# Source: eventhubs.com/moves/mk1/
 
 @alphabet
-# Attack Buttons - MK notation (numbers)
 1: button (Front Punch)
 2: button (Back Punch)
 3: button (Front Kick)
 4: button (Back Kick)
 
-# Directional Inputs - WASD controls
 w: direction (Up)
 a: direction (Back)
 s: direction (Down)
 d: direction (Forward)
 
 @moves
-# Liu Kang - Shaolin Champion
-1 -> "Quick Jab" (Liu Kang)
-d, 1 -> "Advancing Strike" (Liu Kang)
-s, a, 1 -> "High Fireball" (Liu Kang)
-s, d, 1 -> "Low Fireball" (Liu Kang)
-a, d, 3 -> "Flying Dragon Kick" (Liu Kang)
-s, a, 4 -> "Bicycle Kick" (Liu Kang)
-s, d, s, a, 1 -> "Fatal Blow" (Liu Kang)
+a, d, 1 -> "Fireball" (Liu Kang)
+s, a, 1 -> "Low Fireball" (Liu Kang)
+s, d, 4 -> "Dragon's Breath" (Liu Kang)
+a, d, 3 -> "Dragon's Tail" (Liu Kang)
 
-# Scorpion - Hellspawn Ninja
 a, d, 1 -> "Spear" (Scorpion)
-s, a, 4 -> "Demon Dash" (Scorpion)
-s, a, 3 -> "Teleport" (Scorpion)
-d, s, d, 2 -> "Death Spin" (Scorpion)
-s, d, s, d, 1 -> "Fatal Blow" (Scorpion)
+a, d, 2 -> "Blazing Charge" (Scorpion)
+a, d, 4 -> "Devouring Flame" (Scorpion)
+s, d, 3 -> "Flame Port" (Scorpion)
+s, d, 2 -> "Twisted Kyo" (Scorpion)
 
-# Sub-Zero - Grandmaster
-s, d, 2 -> "Ice Ball" (Sub-Zero)
-s, a, 4 -> "Slide" (Sub-Zero)
-s, a, 2 -> "Ice Klone" (Sub-Zero)
-a, d, 3 -> "Rising Ice" (Sub-Zero)
-s, d, s, a, 2 -> "Fatal Blow" (Sub-Zero)
+s, d, 1 -> "Ice Ball" (Sub-Zero)
+s, a, 1 -> "Ice Klone" (Sub-Zero)
+a, d, 2 -> "Ice Klone Charge" (Sub-Zero)
+a, d, 3 -> "Ice Slide" (Sub-Zero)
+s, d, 4 -> "Deadly Vapors" (Sub-Zero)
 
-# Kitana - Princess of Edenia
 s, d, 1 -> "Fan Toss" (Kitana)
-s, a, 1 -> "Ground War" (Kitana)
-s, a, 3 -> "Square Wave" (Kitana)
-a, d, 2 -> "Edenian Twist" (Kitana)
-d, s, d, 3 -> "Fan Lift" (Kitana)
+a, d, 1 -> "Fan Nado" (Kitana)
+s, a, 2 -> "Upward Fan Toss" (Kitana)
+a, s, d, 4 -> "Bending Wind" (Kitana)
 
-# Raiden - Thunder God
-s, d, 1 -> "Lightning Bolt" (Raiden)
-s, a, 3 -> "Electric Fly" (Raiden)
-s, a, 2 -> "Teleport" (Raiden)
-d, d, 4 -> "Storm Cell" (Raiden)
-s, d, s, a, 3 -> "Fatal Blow" (Raiden)
+a, d, 3 -> "Electric Fly" (Raiden)
+s, d, 1 -> "Electric Orb" (Raiden)
+s, a, 3 -> "Electromagnetic Storm" (Raiden)
+s, d, 2 -> "Shocker" (Raiden)
+s, a, 2 -> "Razzle Dazzle" (Raiden)
 
-# Mileena - Empress of Outworld
-a, d, 2 -> "Sai Blast" (Mileena)
-d, s, d, 3 -> "Ball Roll" (Mileena)
-s, a, 4 -> "Teleport Kick" (Mileena)
-s, d, 1 -> "Low Sai" (Mileena)
+a, d, 1 -> "Straight Sai" (Mileena)
+a, d, 3 -> "Low Sai" (Mileena)
+d, s, 4 -> "Roll" (Mileena)
+s, d, 2 -> "Teleport Down" (Mileena)
+s, a, 2 -> "Teleport Up" (Mileena)
 
-# Johnny Cage - Action Star
-s, a, 1 -> "Forceball" (Johnny Cage)
-a, d, 3 -> "Shadow Kick" (Johnny Cage)
-s, a, 4 -> "Nut Punch" (Johnny Cage)
-d, d, 2 -> "Rising Star" (Johnny Cage)
+s, a, d, 1 -> "Show Off" (Johnny Cage)
+s, a, d, 3 -> "Rising Star" (Johnny Cage)
+s, d, a, 3 -> "Shadow Dash" (Johnny Cage)
+a, d, s, 1 -> "Ball Buster" (Johnny Cage)
 
-# Kung Lao - Shaolin Monk
-s, d, 2 -> "Hat Throw" (Kung Lao)
-s, a, 2 -> "Teleport" (Kung Lao)
-a, d, 2 -> "Spin" (Kung Lao)
-s, d, 4 -> "Dive Kick" (Kung Lao)
+a, d, 1 -> "Buzzsaw" (Kung Lao)
+s, d, 1 -> "Hat Toss" (Kung Lao)
+s, d, 2 -> "Kung-Kussion" (Kung Lao)
+a, d, 2 -> "Shaolin Shimmy" (Kung Lao)
+s, w, 3 -> "Shaolin Spin" (Kung Lao)
+s, d, 4 -> "Soaring Monk" (Kung Lao)
 
-# Baraka - Tarkatan Warrior
-s, d, 1 -> "Blade Spark" (Baraka)
-a, d, 3 -> "Blade Charge" (Baraka)
-s, a, 2 -> "Blade Spin" (Baraka)
-s, d, 4 -> "Gutted" (Baraka)
+s, d, 1 -> "Stab Stab" (Baraka)
+s, a, 2 -> "Baraka Barrage" (Baraka)
+a, d, 1 -> "Bleeding Blade" (Baraka)
+a, d, 3 -> "Chop Chop" (Baraka)
 
-# Shang Tsung - Sorcerer
-s, a, 1 -> "Skull Fireball" (Shang Tsung)
-s, d, 2 -> "Ground Skull" (Shang Tsung)
-s, a, 4 -> "Soul Steal" (Shang Tsung)
+s, d, 1 -> "Straight Skull" (Shang Tsung)
+s, a, 1 -> "Double Skull" (Shang Tsung)
+s, a, 2 -> "Triple Skull" (Shang Tsung)
+s, d, 2 -> "Spinning Spikes" (Shang Tsung)
+s, a, 3 -> "Bed of Spikes" (Shang Tsung)
+s, a, 4 -> "Form Stealer" (Shang Tsung)
 
-# Kenshi - Blind Swordsman
-s, d, 1 -> "Telekinetic Push" (Kenshi)
-s, a, 2 -> "Rising Karma" (Kenshi)
-a, d, 3 -> "Spirit Slash" (Kenshi)
-s, d, 4 -> "Telekinetic Slam" (Kenshi)
+a, d, 2 -> "Soul Charge" (Kenshi)
+a, d, 4 -> "Force Push" (Kenshi)
+a, d, 3 -> "Rising Karma" (Kenshi)
+s, d, a, 1 -> "Ancestral Guard" (Kenshi)
+s, a, a, 2 -> "Demon Drop" (Kenshi)
 
-# Sindel - Queen of Edenia
-s, d, 1 -> "Banshee Barrage" (Sindel)
-s, a, 2 -> "Hair Whip" (Sindel)
-s, a, 4 -> "Levitate" (Sindel)
+s, a, 1 -> "Hairball" (Sindel)
+s, d, 1 -> "Low Hairball" (Sindel)
+s, d, 3 -> "Inspire" (Sindel)
+s, a, 4 -> "Kartwheel" (Sindel)
+s, d, 4 -> "Queen's Command" (Sindel)
+a, d, 2 -> "Scream" (Sindel)
 
-# Smoke - Enenra
-s, a, 1 -> "Smoke Bomb" (Smoke)
-s, d, 3 -> "Invisibility" (Smoke)
-a, d, 2 -> "Teleport Punch" (Smoke)
+s, d, 1 -> "Shadow Blade" (Smoke)
+s, d, 2 -> "Smoke Bomb" (Smoke)
+s, d, 4 -> "Smoke-Port" (Smoke)
+a, d, 3 -> "Vicious Vapors" (Smoke)
 
-# Reptile - Zaterran
-s, d, 1 -> "Acid Spit" (Reptile)
-a, d, 4 -> "Slide" (Reptile)
-s, a, 2 -> "Invisibility" (Reptile)
+s, a, 1 -> "Acid Spit" (Reptile)
+s, d, 3 -> "Force Ball" (Reptile)
+s, w, 4 -> "Invisibility" (Reptile)
 
-# Generic universal moves
+a, d, 1 -> "Time Stop" (Geras)
+a, d, 3 -> "Redo" (Geras)
+s, a, 2 -> "History Lesson" (Geras)
+s, a, 4 -> "Sandstorm" (Geras)
+s, d, 3 -> "Countdown" (Geras)
+s, d, 4 -> "Denial" (Geras)
+
+s, d, a, 1 -> "Dark Energy" (General Shao)
+s, d, a, 2 -> "Reverse Treechopper" (General Shao)
+s, a, a, 4 -> "Death Quake" (General Shao)
+s, a, a, 3 -> "Devastator" (General Shao)
+
+a, d, 1 -> "Bad Blood" (Nitara)
+s, a, 4 -> "Blood Sacrifice" (Nitara)
+
+s, d, 1 -> "Heaven's Beacon" (Ashrah)
+a, d, 2 -> "Astral Projection" (Ashrah)
+s, d, 3 -> "Dark Ascension" (Ashrah)
+s, a, 2 -> "God's Wrath" (Ashrah)
+
+a, d, 1 -> "Neoplasm" (Havik)
+a, d, 2 -> "Blood Bath" (Havik)
+a, d, 3 -> "Seeking Neoplasm" (Havik)
+s, a, 1 -> "Helping Hand" (Havik)
+s, a, 4 -> "Twisted Torso" (Havik)
+
+a, d, 1 -> "Nova Blast" (Li Mei)
+s, d, 2 -> "Sky Lantern" (Li Mei)
+s, d, 3 -> "Foo Tang" (Li Mei)
+a, d, 4 -> "Chain Reaction" (Li Mei)
+
+s, a, 1 -> "Heavenly Hand" (Tanya)
+s, d, 3 -> "Deity Push" (Tanya)
+s, a, 3 -> "Seeking Guidance" (Tanya)
+s, d, 4 -> "Spinning Splits Kick" (Tanya)
+a, d, 4 -> "Drill Kick" (Tanya)
+
+a, d, 2 -> "Assassin Throwing Stars" (Reiko)
+a, d, 3 -> "Charging Pain" (Reiko)
+s, a, 1 -> "Retaliation" (Reiko)
+s, a, 3 -> "Tactical Takedown" (Reiko)
+a, s, d, 1 -> "Pale Rider" (Reiko)
+
+a, d, 1 -> "Water Beam" (Rain)
+s, a, 1 -> "Upflow" (Rain)
+s, a, 3 -> "Geyser" (Rain)
+a, d, 4 -> "Ancient Trap" (Rain)
+s, a, 2 -> "Water Gate" (Rain)
+
+a, d, 1 -> "Spirit Punch" (Ermac)
+a, d, 2 -> "Behind You" (Ermac)
+s, d, 2 -> "Suspended Animation" (Ermac)
+s, d, 3 -> "Hungry Hands" (Ermac)
+s, d, 4 -> "Shifting Spirits" (Ermac)
+
+a, d, 1 -> "Head Rush" (Quan Chi)
+a, d, 4 -> "Falling Death" (Quan Chi)
+s, d, 4 -> "From The Fog" (Quan Chi)
+
+a, d, 1 -> "Mega Clap" (Omni-Man)
+a, d, 2 -> "Giblet Maker" (Omni-Man)
+a, d, 4 -> "Invincible Rush" (Omni-Man)
+s, d, 3 -> "Viltrumite Stance" (Omni-Man)
+
+s, d, 1 -> "Dirty Trick" (Homelander)
+s, d, 2 -> "Blast Off" (Homelander)
+a, d, 2 -> "Diabolical Dash" (Homelander)
+
+s, a, d, 1 -> "Silent and Deadly" (Peacemaker)
+s, a, d, 2 -> "Activate Anti-Gravity" (Peacemaker)
+s, a, d, 4 -> "Beautiful Bird Bullet" (Peacemaker)
+s, d, a, 4 -> "Ground-Air Offensive" (Peacemaker)
+a, d, d, a, 1 -> "Force Multiplier" (Peacemaker)
+a, d, d, a, 2 -> "Activate Human Torpedo" (Peacemaker)
+a, d, d, a, 3 -> "Activate Sonic Boom" (Peacemaker)
+
+a, d, 2 -> "Double Spear Ryu" (Takeda)
+s, a, 1 -> "Falling Star" (Takeda)
+s, d, 3 -> "Rushing Nimbus" (Takeda)
+
 s, 1 -> "Down Punch" (Universal)
 s, 3 -> "Low Kick" (Universal)
 w, 3 -> "Jump Kick" (Universal)

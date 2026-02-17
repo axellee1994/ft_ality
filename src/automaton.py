@@ -2,7 +2,7 @@
 
 from typing import Tuple, Optional
 from functools import reduce
-from .types import State, Automaton, Grammar, Move
+from .utils import State, Automaton, Grammar, Move
 
 
 def find_state(states: Tuple[State, ...], state_id: int) -> Optional[State]:

@@ -13,10 +13,11 @@ from src import (
 def main() -> int:
     """Main entry point"""
     if len(sys.argv) < 2:
-        print("Usage: ./ft_ality <grammar_file>")
+        print("Usage: ./ft_ality <grammar_file> [--debug]")
         return 1
 
     grammar_file = sys.argv[1]
+    debug = "--debug" in sys.argv
 
     content = read_file_content(grammar_file)
     if content is None:
@@ -28,7 +29,7 @@ def main() -> int:
         automaton = build_automaton(grammar)
 
         display_key_mappings(grammar)
-        run_interactive_mode(grammar, automaton)
+        run_interactive_mode(grammar, automaton, debug)
 
     except KeyboardInterrupt:
         print("\n\nExiting training mode...")

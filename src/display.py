@@ -1,7 +1,7 @@
 """Display functions for ft_ality"""
 
 from typing import Tuple
-from .types import Grammar, Move
+from .utils import Grammar, Move
 from .utils import lookup_symbol
 
 
@@ -40,7 +40,7 @@ def display_key_mappings(grammar: Grammar) -> None:
         groups = reduce(add_to_groups, mappings, ())
         return tuple((t, tuple(sorted(items))) for t, items in sorted(groups))
 
-    print("Controls:")
+    print("Key mappings:")
     grouped = group_by_type(grammar.key_mappings)
 
     for sym_type, mappings in grouped:
