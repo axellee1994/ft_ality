@@ -1,4 +1,4 @@
-.PHONY: build run test clean
+.PHONY: build run clean
 
 PYTHON := python3
 GRAMMAR := grammars/mk9.gmr
@@ -13,9 +13,6 @@ ft_ality:
 
 run: ft_ality
 	./ft_ality $(GRAMMAR)
-
-test: build
-	$(PYTHON) main.py $(GRAMMAR)
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null

@@ -1,4 +1,4 @@
-# Mortal Kombat 1 (2023) - Complete Move Grammar
+# Mortal Kombat 1 (2023) - Move Grammar
 # Source: eventhubs.com/moves/mk1/
 
 @alphabet
@@ -172,9 +172,3 @@ a, d, d, a, 3 -> "Activate Sonic Boom" (Peacemaker)
 a, d, 2 -> "Double Spear Ryu" (Takeda)
 s, a, 1 -> "Falling Star" (Takeda)
 s, d, 3 -> "Rushing Nimbus" (Takeda)
-
-s, 1 -> "Down Punch" (Universal)
-s, 3 -> "Low Kick" (Universal)
-w, 3 -> "Jump Kick" (Universal)
-a, a -> "Back Dash" (Universal)
-d, d -> "Forward Dash" (Universal)

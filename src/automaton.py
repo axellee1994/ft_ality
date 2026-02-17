@@ -1,4 +1,4 @@
-"""Automaton building functions for ft_ality"""
+"""V.1 Formal definition"""
 
 from typing import Tuple, Optional
 from functools import reduce

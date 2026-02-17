@@ -45,14 +45,12 @@ def read_file_content(filepath: str) -> Optional[str]:
         return None
 
     fd = os.open(filepath, os.O_RDONLY)
-    content = b""
 
-    while True:
+    def read_chunks(acc: bytes) -> bytes:
         chunk = os.read(fd, 4096)
-        if not chunk:
-            break
-        content += chunk
+        return acc if not chunk else read_chunks(acc + chunk)
 
+    content = read_chunks(b"")
     os.close(fd)
     return content.decode("utf-8")
 

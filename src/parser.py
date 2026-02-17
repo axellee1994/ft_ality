@@ -60,17 +60,14 @@ def partition_sections(
         cleaned = strip_comment(line)
         if is_empty(cleaned):
             return acc
-
         if cleaned.startswith("@"):
             return (alpha, keys, mvs, cleaned[1:])
-
         if section == "alphabet":
             return (alpha + (cleaned,), keys, mvs, section)
         elif section == "keymapping":
             return (alpha, keys + (cleaned,), mvs, section)
         elif section == "moves":
             return (alpha, keys, mvs + (cleaned,), section)
-
         return acc
 
     alpha, keys, mvs, _ = reduce(helper, lines, ((), (), (), ""))
@@ -84,7 +81,7 @@ def parse_section(lines: Tuple[str, ...], parser) -> Tuple:
 
 
 def parse_grammar(content: str) -> Grammar:
-    """Parse grammar file content (pure function)"""
+    """I dont like keymapping, but keeping it for failsafe"""
     lines = tuple(content.split("\n"))
     alpha_lines, key_lines, move_lines = partition_sections(lines)
     alphabet = parse_section(alpha_lines, parse_alphabet_line)
