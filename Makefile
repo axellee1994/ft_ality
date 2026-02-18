@@ -1,10 +1,10 @@
 .PHONY: build run clean
 
 PYTHON := python3
-GRAMMAR := grammars/mk9.gmr
+GRAMMAR := grammars/mk1.gmr
 
 build: ft_ality
-	$(PYTHON) -m py_compile main.py
+	$(PYTHON) -m compileall -q src main.py
 
 ft_ality:
 	@echo '#!/bin/bash' > ft_ality

@@ -1,8 +1,10 @@
 """Interactive mode for ft_ality"""
 
+import sys
+import tty
+import termios
 from typing import Tuple
 from .utils import Grammar, Automaton
-from .utils import is_empty
 from .recognition import process_key_input
 
 
@@ -11,29 +13,22 @@ def run_interactive_mode(
 ) -> None:
     """Run interactive recognition mode"""
     print("\nTraining Mode")
-    print("Enter keys separated by spaces to execute moves")
-    print("Press Ctrl+C to exit\n")
+    print("Press keys to execute moves (Ctrl+C to exit)\n")
 
-    def process_keys(
-        buf: Tuple[str, ...], remaining: Tuple[str, ...]
-    ) -> Tuple[str, ...]:
-        if not remaining:
-            return buf
-        new_buf, _ = process_key_input(remaining[0], grammar, automaton, buf, debug)
-        return process_keys(new_buf, remaining[1:])
+    def read_key() -> str:
+        return sys.stdin.read(1)
 
     def input_loop(buffer: Tuple[str, ...]) -> None:
-        try:
-            line = input("> ").strip()
-            if is_empty(line):
-                input_loop(buffer)
-                return
-            keys = tuple(line.split())
-            final_buffer = process_keys(buffer, keys)
-            input_loop(final_buffer)
-        except EOFError:
+        key = read_key()
+        if not key:
             return
-        except KeyboardInterrupt:
-            return
+        new_buffer, _ = process_key_input(key, grammar, automaton, buffer, debug)
+        input_loop(new_buffer)
 
-    input_loop(())
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setcbreak(fd)
+        input_loop(())
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
