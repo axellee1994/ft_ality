@@ -1,5 +1,4 @@
 # Street Fighter 6 (2023) - Move Grammar
-# SF6 has 6 buttons: LP, MP, HP (Punches), LK, MK, HK (Kicks)
 
 @alphabet
 1: button (Light Punch)

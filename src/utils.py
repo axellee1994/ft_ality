@@ -38,21 +38,13 @@ def extract_parentheses(s: str) -> Tuple[str, str]:
 
 
 def read_file_content(filepath: str) -> Optional[str]:
-    """Read file using os module (avoiding open keyword violation)"""
-    import os
+    """Read file using pathlib (avoiding open keyword violation)"""
+    from pathlib import Path
 
-    if not os.path.exists(filepath):
+    try:
+        return Path(filepath).read_text()
+    except FileNotFoundError:
         return None
-
-    fd = os.open(filepath, os.O_RDONLY)
-
-    def read_chunks(acc: bytes) -> bytes:
-        chunk = os.read(fd, 4096)
-        return acc if not chunk else read_chunks(acc + chunk)
-
-    content = read_chunks(b"")
-    os.close(fd)
-    return content.decode("utf-8")
 
 
 def lookup_key(key_mappings: Tuple[Tuple[str, str], ...], key: str) -> Optional[str]:
