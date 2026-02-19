@@ -18,17 +18,15 @@ def run_interactive_mode(
     def read_key() -> str:
         return sys.stdin.read(1)
 
-    def input_loop(buffer: Tuple[str, ...]) -> None:
-        key = read_key()
-        if not key:
-            return
-        new_buffer, _ = process_key_input(key, grammar, automaton, buffer, debug)
-        input_loop(new_buffer)
-
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
         tty.setcbreak(fd)
-        input_loop(())
+        buffer: Tuple[str, ...] = ()
+        while True:
+            key = read_key()
+            if not key:
+                break
+            buffer, _ = process_key_input(key, grammar, automaton, buffer, debug)
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
