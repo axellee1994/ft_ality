@@ -1,0 +1,54 @@
+@startuml ft_ality
+title ft_ality - FSA Fighting Game Move Recognizer
+
+participant "main.py" as Main
+participant "parser.py" as Parser
+participant "automaton.py" as Automaton
+participant "display.py" as Display
+participant "interactive.py" as Interactive
+participant "recognition.py" as Recognition
+
+Main -> Parser    : parse_grammar(content)
+Parser -> Parser  : partition_sections(lines)
+Parser -> Parser  : parse_section() x3
+Parser --> Main   : Grammar(alphabet, key_mappings, moves)
+
+Main -> Automaton : build_automaton(grammar)
+note right of Automaton
+  reduce(add_move_to_automaton, moves)
+  build_path_recursive() reuses or
+  creates states per sequence.
+  Final state marked is_final=True.
+end note
+Automaton --> Main : Automaton(states, transitions)
+
+Main -> Display     : display_key_mappings(grammar)
+Display --> Main    : prints key -> symbol table
+
+Main -> Interactive : run_interactive_mode(grammar, automaton)
+Interactive -> Interactive : _setup_terminal()
+Interactive -> Interactive : trampoline(_make_loop())
+
+loop until Ctrl+C
+    Interactive -> Interactive  : stdin.read(1) -> key
+    Interactive -> Recognition  : process_key_input(key, grammar, automaton, buffer)
+    Recognition -> Recognition  : lookup_key(key_mappings, key) -> symbol
+    Recognition -> Recognition  : new_buffer = buffer + (symbol,)
+    Recognition -> Recognition  : state_id_after(automaton, new_buffer)
+
+    alt final state reached
+        Recognition -> Display      : display_moves(moves)
+        Display --> Recognition     : prints "Move (Character) !!"
+        Recognition --> Interactive : ((), recognized=True)
+    else path still valid
+        Recognition --> Interactive : (new_buffer, recognized=False)
+    else dead end
+        Recognition -> Recognition  : try_single(symbol, automaton)
+        Recognition --> Interactive : (buffer_or_empty, recognized)
+    end
+
+    Interactive -> Interactive : return lambda: loop(new_buffer)
+end
+
+Interactive -> Interactive : _restore_terminal()
+@enduml

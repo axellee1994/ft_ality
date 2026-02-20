@@ -193,7 +193,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-ft_ality.*
+ft_ality.md
 ft_ality
 
 # Cursor
