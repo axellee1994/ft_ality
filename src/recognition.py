@@ -50,6 +50,35 @@ def _debug_end_states(
         print(f'Found end state for "{move.name} ({move.character})" at: {sid}')
 
 
+def emit_recognized(
+    automaton: Automaton,
+    seq: Tuple[str, ...],
+    moves: Tuple[Move, ...],
+    debug: bool,
+) -> Tuple[Tuple[str, ...], bool]:
+    """Print recognized sequence/moves and return empty buffer."""
+    if debug:
+        _debug_end_states(automaton, seq, moves)
+    print(f"\n{', '.join(seq)}")
+    display_moves(moves)
+    return ((), True)
+
+
+def try_single(
+    symbol: str,
+    automaton: Automaton,
+    debug: bool,
+) -> Tuple[Tuple[str, ...], bool]:
+    """Try symbol as a fresh single-token sequence after a dead end."""
+    single = (symbol,)
+    is_recognized, moves = recognize_sequence(automaton, single)
+    if is_recognized:
+        if debug:
+            _debug_transition(automaton, (), symbol, single)
+        return emit_recognized(automaton, single, moves, debug)
+    return (single if state_id_after(automaton, single) != -1 else (), False)
+
+
 def process_key_input(
     key: str,
     grammar: Grammar,
@@ -61,31 +90,12 @@ def process_key_input(
     symbol = lookup_key(grammar.key_mappings, key)
     if symbol is None:
         return (buffer, False)
-
     new_buffer = buffer + (symbol,)
     is_recognized, moves = recognize_sequence(automaton, new_buffer)
-
     if debug:
         _debug_transition(automaton, buffer, symbol, new_buffer)
-
     if is_recognized:
-        if debug:
-            _debug_end_states(automaton, new_buffer, moves)
-        print(f"\n{', '.join(new_buffer)}")
-        display_moves(moves)
-        return ((), True)
-
+        return emit_recognized(automaton, new_buffer, moves, debug)
     if state_id_after(automaton, new_buffer) != -1:
         return (new_buffer, False)
-
-    single = (symbol,)
-    is_recognized_single, moves_single = recognize_sequence(automaton, single)
-    if is_recognized_single:
-        if debug:
-            _debug_transition(automaton, (), symbol, single)
-            _debug_end_states(automaton, single, moves_single)
-        print(f"\n{', '.join(single)}")
-        display_moves(moves_single)
-        return ((), True)
-
-    return (single if state_id_after(automaton, single) != -1 else (), False)
+    return try_single(symbol, automaton, debug)

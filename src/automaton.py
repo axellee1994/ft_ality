@@ -1,5 +1,3 @@
-"""V.1 Formal definition"""
-
 from typing import Tuple, Optional
 from functools import reduce
 from .utils import State, Automaton, Grammar, Move
@@ -41,6 +39,19 @@ def add_transition(
     return filtered + ((key, to_state),)
 
 
+def extend_path(
+    symbol: str,
+    current: int,
+    states: Tuple[State, ...],
+    transitions: Tuple[Tuple[Tuple[int, str], int], ...],
+    next_id: int,
+) -> Tuple[int, Tuple[State, ...], Tuple[Tuple[Tuple[int, str], int], ...], int]:
+    """Create a new state and transition for symbol, return updated data."""
+    new_states = add_state(states, State(next_id, False, ()))
+    new_transitions = add_transition(transitions, current, symbol, next_id)
+    return (next_id, new_states, new_transitions, next_id + 1)
+
+
 def build_path_recursive(
     sequence: Tuple[str, ...],
     current: int,
@@ -51,20 +62,14 @@ def build_path_recursive(
     """Recursively build path through automaton for a sequence"""
     if not sequence:
         return (current, states, transitions, next_id)
-
-    symbol = sequence[0]
-    rest = sequence[1:]
-
+    symbol, rest = sequence[0], sequence[1:]
     existing = find_transition(transitions, current, symbol)
-
     if existing is not None:
         return build_path_recursive(rest, existing, states, transitions, next_id)
-
-    new_state = State(next_id, False, ())
-    new_states = add_state(states, new_state)
-    new_transitions = add_transition(transitions, current, symbol, next_id)
-
-    return build_path_recursive(rest, next_id, new_states, new_transitions, next_id + 1)
+    nxt, new_states, new_transitions, new_id = extend_path(
+        symbol, current, states, transitions, next_id
+    )
+    return build_path_recursive(rest, nxt, new_states, new_transitions, new_id)
 
 
 def add_move_to_automaton(
@@ -75,16 +80,13 @@ def add_move_to_automaton(
 ) -> Tuple[Tuple[State, ...], Tuple[Tuple[Tuple[int, str], int], ...], int]:
     """Add move to automaton (pure function)"""
     states, transitions, next_id = automaton_data
-
     final_state_id, new_states, new_transitions, new_next_id = build_path_recursive(
         move.sequence, 0, states, transitions, next_id
     )
-
     final_state = find_state(new_states, final_state_id)
     updated_state = State(
         final_state_id, True, final_state.moves + (move,) if final_state else (move,)
     )
-
     return (add_state(new_states, updated_state), new_transitions, new_next_id)
 
 

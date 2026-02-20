@@ -43,34 +43,33 @@ def parse_move_line(line: str) -> Optional[Move]:
     name, character = extract_parentheses(name_clean)
     name = name.strip('"')
     character = character if character else "Unknown"
-
     return Move(sequence, name, character)
+
+
+def _section_step(
+    acc: Tuple[Tuple[str, ...], Tuple[str, ...], Tuple[str, ...], str], line: str
+) -> Tuple[Tuple[str, ...], Tuple[str, ...], Tuple[str, ...], str]:
+    """Single reduce step: classify a line into its grammar section."""
+    alpha, keys, mvs, section = acc
+    cleaned = strip_comment(line)
+    if is_empty(cleaned):
+        return acc
+    if cleaned.startswith("@"):
+        return (alpha, keys, mvs, cleaned[1:])
+    if section == "alphabet":
+        return (alpha + (cleaned,), keys, mvs, section)
+    if section == "keymapping":
+        return (alpha, keys + (cleaned,), mvs, section)
+    if section == "moves":
+        return (alpha, keys, mvs + (cleaned,), section)
+    return acc
 
 
 def partition_sections(
     lines: Tuple[str, ...],
 ) -> Tuple[Tuple[str, ...], Tuple[str, ...], Tuple[str, ...]]:
     """Partition lines into (alphabet, keymapping, moves) sections"""
-
-    def helper(
-        acc: Tuple[Tuple[str, ...], Tuple[str, ...], Tuple[str, ...], str], line: str
-    ) -> Tuple[Tuple[str, ...], Tuple[str, ...], Tuple[str, ...], str]:
-        alpha, keys, mvs, section = acc
-
-        cleaned = strip_comment(line)
-        if is_empty(cleaned):
-            return acc
-        if cleaned.startswith("@"):
-            return (alpha, keys, mvs, cleaned[1:])
-        if section == "alphabet":
-            return (alpha + (cleaned,), keys, mvs, section)
-        elif section == "keymapping":
-            return (alpha, keys + (cleaned,), mvs, section)
-        elif section == "moves":
-            return (alpha, keys, mvs + (cleaned,), section)
-        return acc
-
-    alpha, keys, mvs, _ = reduce(helper, lines, ((), (), (), ""))
+    alpha, keys, mvs, _ = reduce(_section_step, lines, ((), (), (), ""))
     return (alpha, keys, mvs)
 
 
