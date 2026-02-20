@@ -1,5 +1,3 @@
-"""Recognition and key-processing functions for ft_ality"""
-
 from typing import Tuple
 from .utils import Grammar, Automaton, Move
 from .utils import lookup_key
@@ -8,8 +6,6 @@ from .display import display_moves
 
 
 def state_id_after(automaton: Automaton, sequence: Tuple[str, ...]) -> int:
-    """Return state ID reached after processing sequence, or -1 if dead."""
-
     def traverse(seq: Tuple[str, ...], current: int) -> int:
         if not seq:
             return current
@@ -22,7 +18,6 @@ def state_id_after(automaton: Automaton, sequence: Tuple[str, ...]) -> int:
 def recognize_sequence(
     automaton: Automaton, sequence: Tuple[str, ...]
 ) -> Tuple[bool, Tuple[Move, ...]]:
-    """Recognize sequence using automaton (pure function)"""
     sid = state_id_after(automaton, sequence)
     if sid == -1:
         return (False, ())
@@ -46,14 +41,8 @@ def _debug_end_states(
     automaton: Automaton, seq: Tuple[str, ...], moves: Tuple[Move, ...]
 ) -> None:
     sid = state_id_after(automaton, seq)
-    tuple(
-        map(
-            lambda m: print(
-                f'Found end state for "{m.name} ({m.character})" at: {sid}'
-            ),
-            moves,
-        )
-    )
+    for move in moves:
+        print(f'Found end state for "{move.name} ({move.character})" at: {sid}')
 
 
 def emit_recognized(
@@ -62,7 +51,6 @@ def emit_recognized(
     moves: Tuple[Move, ...],
     debug: bool,
 ) -> Tuple[Tuple[str, ...], bool]:
-    """Print recognized sequence/moves and return empty buffer."""
     if debug:
         _debug_end_states(automaton, seq, moves)
     print(f"\n{', '.join(seq)}")
@@ -75,7 +63,6 @@ def try_single(
     automaton: Automaton,
     debug: bool,
 ) -> Tuple[Tuple[str, ...], bool]:
-    """Try symbol as a fresh single-token sequence after a dead end."""
     single = (symbol,)
     is_recognized, moves = recognize_sequence(automaton, single)
     if is_recognized:
@@ -85,6 +72,14 @@ def try_single(
     return (single if state_id_after(automaton, single) != -1 else (), False)
 
 
+def _extend_or_reset(
+    symbol: str, new_buffer: Tuple[str, ...], automaton: Automaton, debug: bool
+) -> Tuple[Tuple[str, ...], bool]:
+    if state_id_after(automaton, new_buffer) != -1:
+        return (new_buffer, False)
+    return try_single(symbol, automaton, debug)
+
+
 def process_key_input(
     key: str,
     grammar: Grammar,
@@ -92,7 +87,6 @@ def process_key_input(
     buffer: Tuple[str, ...],
     debug: bool = False,
 ) -> Tuple[Tuple[str, ...], bool]:
-    """Process single key input. Returns (new_buffer, recognized)."""
     symbol = lookup_key(grammar.key_mappings, key)
     if symbol is None:
         return (buffer, False)
@@ -102,6 +96,4 @@ def process_key_input(
         _debug_transition(automaton, buffer, symbol, new_buffer)
     if is_recognized:
         return emit_recognized(automaton, new_buffer, moves, debug)
-    if state_id_after(automaton, new_buffer) != -1:
-        return (new_buffer, False)
-    return try_single(symbol, automaton, debug)
+    return _extend_or_reset(symbol, new_buffer, automaton, debug)

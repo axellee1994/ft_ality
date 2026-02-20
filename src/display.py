@@ -43,22 +43,22 @@ def group_mappings_by_type(
 
 def print_group(sym_type: str, mappings: Tuple[Tuple[str, str], ...]) -> None:
     """Print a single group of key mappings"""
-    tuple(map(lambda _: print(f"\n{sym_type}:"), (sym_type,) if sym_type else ()))
-    tuple(map(lambda kd: print(f"  {kd[0]} -> {kd[1]}"), mappings))
+    if sym_type:
+        print(f"\n{sym_type}:")
+    for key, desc in mappings:
+        print(f"  {key} -> {desc}")
 
 
 def display_key_mappings(grammar: Grammar) -> None:
     """Display key mappings grouped by type"""
     print("Key mappings:")
     grouped = group_mappings_by_type(grammar.alphabet, grammar.key_mappings)
-    tuple(map(lambda g: print_group(*g), grouped))
+    for group in grouped:
+        print_group(*group)
     print("\n" + "-" * 50)
 
 
 def display_moves(moves: Tuple[Move, ...]) -> None:
     """Display recognized moves"""
-
-    def show_move(move: Move) -> None:
+    for move in moves:
         print(f"{move.name} ({move.character}) !!")
-
-    tuple(map(show_move, moves))
