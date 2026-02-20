@@ -22,7 +22,9 @@ def recognize_sequence(
     if sid == -1:
         return (False, ())
     state = find_state(automaton.states, sid)
-    return (True, state.moves) if state and state.is_final else (False, ())
+    return (
+        (True, state.moves) if sid in automaton.final_states and state else (False, ())
+    )
 
 
 def _debug_transition(
@@ -37,14 +39,6 @@ def _debug_transition(
         print(f'State {from_state}, "{symbol}" -> State {to_state}')
 
 
-def _debug_end_states(
-    automaton: Automaton, seq: Tuple[str, ...], moves: Tuple[Move, ...]
-) -> None:
-    sid = state_id_after(automaton, seq)
-    for move in moves:
-        print(f'Found end state for "{move.name} ({move.character})" at: {sid}')
-
-
 def emit_recognized(
     automaton: Automaton,
     seq: Tuple[str, ...],
@@ -52,7 +46,9 @@ def emit_recognized(
     debug: bool,
 ) -> Tuple[Tuple[str, ...], bool]:
     if debug:
-        _debug_end_states(automaton, seq, moves)
+        sid = state_id_after(automaton, seq)
+        for move in moves:
+            print(f'Found end state for "{move.name} ({move.character})" at: {sid}')
     print(f"\n{', '.join(seq)}")
     display_moves(moves)
     return ((), True)

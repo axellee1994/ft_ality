@@ -1,5 +1,3 @@
-"""Grammar parsing functions for ft_ality"""
-
 from typing import Tuple, Optional
 from functools import reduce
 from .utils import Symbol, Move, Grammar
@@ -10,10 +8,8 @@ def parse_alphabet_line(line: str) -> Optional[Tuple[str, Symbol]]:
     """Parse single alphabet line into (token, Symbol)"""
     if ":" not in line:
         return None
-
     token, rest = split_once(line, ":")
     sym_type, description = extract_parentheses(rest)
-
     return (token, Symbol(token, sym_type, description))
 
 
@@ -30,15 +26,12 @@ def parse_move_line(line: str) -> Optional[Move]:
     """Parse single move line into Move"""
     if "->" not in line:
         return None
-
     sequence_part, name_part = split_once(line, "->")
-
     sequence = tuple(
         token.strip()
         for token in sequence_part.split(",")
         if not is_empty(token.strip())
     )
-
     name_clean = name_part.strip('"')
     name, character = extract_parentheses(name_clean)
     name = name.strip('"')

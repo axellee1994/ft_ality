@@ -59,7 +59,6 @@ def build_path_recursive(
     transitions: Tuple[Tuple[Tuple[int, str], int], ...],
     next_id: int,
 ) -> Tuple[int, Tuple[State, ...], Tuple[Tuple[Tuple[int, str], int], ...], int]:
-    """Recursively build path through automaton for a sequence"""
     if not sequence:
         return (current, states, transitions, next_id)
     symbol, rest = sequence[0], sequence[1:]
@@ -78,7 +77,6 @@ def add_move_to_automaton(
     ],
     move: Move,
 ) -> Tuple[Tuple[State, ...], Tuple[Tuple[Tuple[int, str], int], ...], int]:
-    """Add move to automaton (pure function)"""
     states, transitions, next_id = automaton_data
     final_state_id, new_states, new_transitions, new_next_id = build_path_recursive(
         move.sequence, 0, states, transitions, next_id
@@ -91,8 +89,8 @@ def add_move_to_automaton(
 
 
 def build_automaton(grammar: Grammar) -> Automaton:
-    """Build automaton from grammar (pure function)"""
-    alphabet = tuple(set(symbol for move in grammar.moves for symbol in move.sequence))
     initial = ((State(0, False, ()),), (), 1)
     states, transitions, _ = reduce(add_move_to_automaton, grammar.moves, initial)
-    return Automaton(states, transitions, 0, alphabet)
+    final_states = tuple(s.state_id for s in states if s.is_final)
+    alphabet = tuple(tok for tok, _ in grammar.alphabet)
+    return Automaton(states, transitions, 0, final_states, alphabet)
