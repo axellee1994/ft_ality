@@ -8,7 +8,7 @@ from .interactive import run_interactive_mode
 from .display import display_key_mappings, display_moves
 from .utils import read_file_content
 
-__all__ = [
+__all__ = (
     "Symbol",
     "Move",
     "Grammar",
@@ -21,4 +21,4 @@ __all__ = [
     "display_moves",
     "run_interactive_mode",
     "read_file_content",
-]
+)

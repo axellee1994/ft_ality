@@ -41,10 +41,8 @@ def read_file_content(filepath: str) -> Optional[str]:
     """Read file using pathlib (avoiding open keyword violation)"""
     from pathlib import Path
 
-    try:
-        return Path(filepath).read_text()
-    except FileNotFoundError:
-        return None
+    p = Path(filepath)
+    return p.read_text() if p.exists() else None
 
 
 def lookup_key(key_mappings: Tuple[Tuple[str, str], ...], key: str) -> Optional[str]:

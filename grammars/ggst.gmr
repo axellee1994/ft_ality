@@ -131,11 +131,6 @@ d, w, 4 -> "Behemoth Typhoon Forward" (Goldlewis Dickinson)
 a, w, 4 -> "Behemoth Typhoon Back" (Goldlewis Dickinson)
 w, 4 -> "Behemoth Typhoon Up" (Goldlewis Dickinson)
 
-s, d, 4 -> "Recover Servant" (Jack-O' Valentine)
-s, a, 4 -> "Deploy Servant" (Jack-O' Valentine)
-d, s, d, 2 -> "Release Servant" (Jack-O' Valentine)
-s, d, 2 -> "Shoot Servant" (Jack-O' Valentine)
-
 s, d, 1 -> "At The Ready" (Happy Chaos)
 s, a, 1 -> "Scapegoat" (Happy Chaos)
 s, d, 3 -> "Steady Aim" (Happy Chaos)

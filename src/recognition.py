@@ -46,8 +46,14 @@ def _debug_end_states(
     automaton: Automaton, seq: Tuple[str, ...], moves: Tuple[Move, ...]
 ) -> None:
     sid = state_id_after(automaton, seq)
-    for move in moves:
-        print(f'Found end state for "{move.name} ({move.character})" at: {sid}')
+    tuple(
+        map(
+            lambda m: print(
+                f'Found end state for "{m.name} ({m.character})" at: {sid}'
+            ),
+            moves,
+        )
+    )
 
 
 def emit_recognized(
