@@ -4,16 +4,22 @@ import sys
 import tty
 import termios
 import signal
+from functools import reduce
 from itertools import takewhile
 from typing import Tuple, Callable, Optional
-from toolz import iterate
 from .utils import Grammar, Automaton
 from .recognition import process_key_input
 
 
+def _iterate(f: Callable, x):
+    """Yield x, f(x), f(f(x)), ... indefinitely."""
+    yield x
+    yield from _iterate(f, f(x))
+
+
 def trampoline(thunk: Callable) -> None:
     """Drive tail-recursive thunks without growing the call stack"""
-    tuple(takewhile(callable, iterate(lambda f: f(), thunk)))
+    reduce(lambda _, f: f, takewhile(callable, _iterate(lambda f: f(), thunk)), None)
 
 
 def _setup_terminal(fd: int) -> Tuple:
@@ -30,15 +36,18 @@ def _restore_terminal(fd: int, old_settings: Tuple) -> None:
 
 def _make_sigint_handler(fd: int, old_settings: Tuple) -> Callable:
     """Return a SIGINT handler that restores the terminal and exits cleanly."""
+
     def handler(*_) -> None:
         _restore_terminal(fd, old_settings)
         print("\n\nExiting training mode...")
         sys.exit(0)
+
     return handler
 
 
 def _make_loop(grammar: Grammar, automaton: Automaton, debug: bool) -> Callable:
     """Return the tail-recursive loop thunk for interactive key reading."""
+
     def read_key() -> Optional[str]:
         char = sys.stdin.read(1)
         return char if char else None
