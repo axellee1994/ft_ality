@@ -7,12 +7,12 @@ Symbol = namedtuple("Symbol", ["token", "sym_type", "description"])
 Move = namedtuple("Move", ["sequence", "name", "character"])
 Grammar = namedtuple("Grammar", ["alphabet", "key_mappings", "moves"])
 State = namedtuple("State", ["state_id", "is_final", "moves"])
-# A = ⟨Q, Σ, Q0 , F, δ⟩
-# Q is the set of states in the automaton.
-# Σ is the automaton’s input alphabet.
-# Q0 is the starting state, with Q0 ∈ Q of course.
-# F is the set of recognition states, with F ⊆ Q.
-# δ is a function that assigns transitions to the automaton’s states.
+# Using s, d, 1 -> "Hadoken" (Ryu) from sf6.gmr as the example
+# Alphabet (Σ)          s, d, 1
+# States (Q)            {q0, q1, q2, q3}
+# Initial State (q0)    q0
+# Final State (F)       q3
+# Transition (δ)        δ(q0, s) = q1
 Automaton = namedtuple(
     "Automaton", ["states", "transitions", "initial_state", "final_states", "alphabet"]
 )
