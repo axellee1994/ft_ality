@@ -4,16 +4,16 @@ import sys
 import tty
 import termios
 import signal
+from itertools import takewhile
 from typing import Tuple, Callable, Optional
+from toolz import iterate
 from .utils import Grammar, Automaton
 from .recognition import process_key_input
 
 
 def trampoline(thunk: Callable) -> None:
     """Drive tail-recursive thunks without growing the call stack"""
-    result = thunk
-    while callable(result):
-        result = result()
+    tuple(takewhile(callable, iterate(lambda f: f(), thunk)))
 
 
 def _setup_terminal(fd: int) -> Tuple:
